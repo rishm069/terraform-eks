@@ -16,4 +16,12 @@ resource "helm_release" "nginx_ingress" {
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart      = "ingress-nginx"
 
+  create_namespace = true
+  namespace = "ingress-nginx"
+
+  depends_on = [
+    module.eks,
+    module.vpc
+  ]
+
 }

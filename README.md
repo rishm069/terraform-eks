@@ -6,7 +6,7 @@ In this repository, a simple Python app is stored along with infrastructure for 
 
 - - - -
 
-> **IMPORTANT**: this setup is tested on Ubuntu 22.01 but should work on most Linux machines.
+> **IMPORTANT**: this setup is tested on Ubuntu 22.04 but should work on most Linux machines.
 
 * All operations and processes are intended to be performed on a local Linux machine with the following toolset installed:
 

@@ -5,6 +5,7 @@ variable "region" {
 }
 
 variable "ecr_repository_name" {
+  description = "Namespace for dummy app"
   type        = string
   default     = "dummy-app"
 }

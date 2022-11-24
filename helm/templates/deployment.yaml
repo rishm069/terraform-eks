@@ -1,0 +1,33 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: "{{ include "dummy-app.fullname" . }}"
+  namespace: "{{ .Values.namespace }}"
+  labels:
+    app: "{{ include "dummy-app.fullname" . }}"
+    env: "{{ .Values.env }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: "{{ include "dummy-app.fullname" . }}"
+      env: "{{ .Values.env }}"
+  template:
+    metadata:
+      name: "{{ include "dummy-app.fullname" . }}"
+      labels:
+        app: "{{ include "dummy-app.fullname" . }}"
+        env: "{{ .Values.env }}"
+    spec:
+      containers:
+      - name: "{{ include "dummy-app.fullname" . }}"
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: "{{ .Values.image.pullPolicy }}"
+        {{- if .Values.resources }}
+        resources:
+        {{- toYaml .Values.resources | nindent 10 }}
+        {{- end }} 

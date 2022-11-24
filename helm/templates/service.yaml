@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: "{{ include "dummy-app.fullname" . }}-service"
+  namespace: "{{ .Values.namespace }}"
+  labels:
+    service: "{{ include "dummy-app.fullname" . }}"
+    app: "{{ include "dummy-app.fullname" . }}"
+    env: "{{ .Values.env }}"
+spec:
+  selector:
+    app: "{{ include "dummy-app.fullname" . }}"
+    env: "{{ .Values.env }}"
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80

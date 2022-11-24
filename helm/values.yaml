@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  pullPolicy: IfNotPresent
+  repository: ""
+  tag: ""
+
+ingress:
+  host: example.com
+
+namespace: dummy-app
+env: dev
+
+resources: 
+  limits:
+    cpu: 100m
+    memory: 200Mi
+  requests:
+    cpu: 50m
+    memory: 50Mi

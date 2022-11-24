@@ -3,7 +3,7 @@ HELM_RELEASE_NAME = dummy-app
 HELM_RELEASE_DIR = ./helm
 HELM_RELEASE_NAMESPACE = $(shell terraform -chdir=${TERRAFORM_DIR} output -raw app_namespace)
 APP_HOSTNAME := example.com
-IMAGE_TAG = 1.0.0
+IMAGE_TAG = 1.0.1
 
 up-all: up-infra up-app
 up-infra: auto-terraform-apply

@@ -20,8 +20,7 @@ resource "helm_release" "nginx_ingress" {
   namespace = "ingress-nginx"
 
   depends_on = [
-    module.eks,
-    module.vpc
+    module.eks
   ]
 
 }

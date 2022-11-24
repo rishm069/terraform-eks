@@ -28,7 +28,7 @@ output "registry_url" {
   description = "Repository URL"
 }
 
-output "app_namespaces" {
+output "app_namespace" {
   value       = module.namespaces.app_namespace
   description = "Namespace for app installation"
 }

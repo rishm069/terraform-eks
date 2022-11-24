@@ -3,7 +3,7 @@ HELM_RELEASE_NAME = dummy-app
 HELM_RELEASE_DIR = ./helm
 HELM_RELEASE_NAMESPACE = $(shell terraform -chdir=${TERRAFORM_DIR} output -raw app_namespace)
 APP_HOSTNAME := example.com
-IMAGE_TAG = 1.0.3
+IMAGE_TAG = 1.0.0
 
 build-and-push: docker-build docker-login docker-push
 docker-build:
@@ -27,7 +27,7 @@ helm-deploy:
 		--set ingress.host=$(APP_HOSTNAME)
 
 local-check:
-	kubectl -n ${HELM_RELEASE_NAMESPACE} port-forward $(shell kubectl get pods --no-headers -o custom-columns=":metadata.name" -n ${HELM_RELEASE_NAMESPACE}) 8080:80
+	kubectl -n ${HELM_RELEASE_NAMESPACE} port-forward $(shell kubectl get pods --no-headers -o custom-columns=":metadata.name" -n ${HELM_RELEASE_NAMESPACE} | tail -n1) 8080:80
 
 get-lb-ip:
 	kubectl -n ingress-nginx get svc ingress-nginx-controller -o json | jq .status.loadBalancer.ingress[].hostname

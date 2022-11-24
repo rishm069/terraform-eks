@@ -5,6 +5,10 @@ HELM_RELEASE_NAMESPACE = $(shell terraform -chdir=${TERRAFORM_DIR} output -raw a
 APP_HOSTNAME := example.com
 IMAGE_TAG = 1.0.0
 
+up-all: up-infra up-app
+up-infra: auto-terraform-apply
+up-app: configure-kubectl build-and-push helm-dry-run helm-deploy
+
 build-and-push: docker-build docker-login docker-push
 docker-build:
 	docker build ./app -f docker/Dockerfile -t $(shell terraform -chdir=${TERRAFORM_DIR} output -raw registry_url):${IMAGE_TAG}

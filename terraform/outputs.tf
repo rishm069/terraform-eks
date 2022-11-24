@@ -27,3 +27,8 @@ output "registry_url" {
   value       = module.ecr.repository_url
   description = "Repository URL"
 }
+
+output "app_namespaces" {
+  value       = module.namespaces.app_namespace
+  description = "Namespace for app installation"
+}
